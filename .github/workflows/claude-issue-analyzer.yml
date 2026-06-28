@@ -1,0 +1,60 @@
+name: Claude Issue Analyzer
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  analyze-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Analyze issue with Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Analyze GitHub issue #${{ github.event.issue.number }} in this repository.
+
+            Issue title: ${{ github.event.issue.title }}
+            Issue body:
+            ${{ github.event.issue.body }}
+
+            Do ALL of the following:
+
+            1. Determine which labels apply from this list:
+               - bug (something is broken or incorrect)
+               - enhancement (improvement to existing feature)
+               - feature-request (new feature)
+               - question (needs clarification or info)
+               - documentation (docs improvement needed)
+               - performance (speed/memory issue)
+               - ui (visual or UX issue)
+               Apply labels using: gh issue edit ${{ github.event.issue.number }} --add-label "label1,label2" --repo ${{ github.repository }}
+
+            2. Post a diagnostic comment on the issue using gh issue comment with this exact structure (in Spanish):
+
+            ## 🔍 Diagnóstico automático — Claude
+
+            **Tipo:** [clasificación del issue]
+
+            **Problema:** [resumen técnico en 1-2 oraciones]
+
+            **Área afectada:** [qué parte del código/sistema se ve impactada]
+
+            **Diagnóstico:** [análisis detallado: causa raíz probable, comportamiento esperado vs actual, edge cases relevantes]
+
+            **Dirección de implementación:** [qué habría que modificar — archivos relevantes, funciones, lógica sugerida — sin incluir código]
+
+            **Complejidad estimada:** [Baja / Media / Alta] — [justificación breve]
+
+            Use: gh issue comment ${{ github.event.issue.number }} --body "..." --repo ${{ github.repository }}
