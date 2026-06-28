@@ -54,4 +54,13 @@ jobs:
               gh issue edit ${{ github.event.issue.number }} --add-label "bug" --repo ${{ github.repository }}
               gh issue comment ${{ github.event.issue.number }} --body "..." --repo ${{ github.repository }}
 
+            **Format requirements for the comment body:**
+            - Write in GitHub Flavored Markdown (GFM)
+            - Use `##` for section headings
+            - Use `**bold**` for field labels
+            - Use `-` for bullet lists
+            - Use backticks for code, filenames, or label names
+            - Use `>` blockquotes for quoting issue text if needed
+            - Ensure the body renders correctly on GitHub — avoid raw HTML
+
             Be concise, helpful, and friendly. Do not over-engineer the response.
