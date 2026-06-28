@@ -17,11 +17,21 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for label in "bug" "enhancement" "question" "documentation" "good first issue" "duplicate"; do
+            gh label create "$label" --repo ${{ github.repository }} --force 2>/dev/null || true
+          done
+
       - name: Format issue with Claude
         uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--allowedTools Bash(gh issue *)"
+          allowed_tools: "Bash(gh issue edit *),Bash(gh issue comment *)"
           prompt: |
             You are a GitHub issue formatter for a Tetris game project (vanilla JS/HTML/CSS, no dependencies).
 
