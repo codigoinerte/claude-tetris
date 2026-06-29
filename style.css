@@ -180,18 +180,110 @@ kbd {
   align-items: center;
 }
 
-#overlay-title {
+#gameover-title {
   font-size: 28px;
   font-weight: 800;
   letter-spacing: 4px;
   color: #e57373;
 }
 
-#overlay-score {
+#gameover-score {
   font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
   color: var(--value-color);
   transition: color 0.3s;
+}
+
+#pause-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--title-color);
+  transition: color 0.3s;
+}
+
+/* ---- Pause menu buttons ---- */
+.pause-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.pause-btn {
+  width: 100%;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.pause-btn-primary {
+  background: var(--value-color);
+  color: var(--bg-page);
+  border: none;
+}
+
+.pause-btn-primary:hover {
+  background: #9bbdff;
+}
+
+.pause-btn-secondary {
+  background: transparent;
+  color: var(--value-color);
+  border: 1px solid var(--value-color);
+}
+
+.pause-btn-secondary:hover {
+  background: var(--value-color);
+  color: var(--bg-page);
+}
+
+/* ---- Pause controls list ---- */
+.pause-controls-list {
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  text-align: left;
+}
+
+.pause-controls-list.is-open {
+  display: flex;
+}
+
+.pause-controls-list li {
+  font-size: 12px;
+  color: var(--controls-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+/* ---- Pause level row ---- */
+.pause-level-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-color);
+}
+
+#start-level-select {
+  background: var(--kbd-bg);
+  color: var(--text-color);
+  border: 1px solid var(--kbd-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #restart-btn {
