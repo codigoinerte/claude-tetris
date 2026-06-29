@@ -269,3 +269,122 @@ kbd {
 input:checked + .slider::before {
   transform: translateX(20px);
 }
+
+/* ---- Leaderboard ---- */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+
+.leaderboard-table thead th {
+  color: var(--label-color);
+  text-align: left;
+  letter-spacing: 1px;
+  padding: 2px 3px;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.leaderboard-table tbody td {
+  padding: 3px 3px;
+  vertical-align: middle;
+}
+
+.leaderboard-table tbody tr:hover {
+  background: rgba(122, 162, 247, 0.07);
+}
+
+.leaderboard-highlight {
+  background: rgba(255, 213, 79, 0.15) !important;
+  color: #ffd54f;
+}
+
+.leaderboard-rank {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: var(--label-color);
+  min-width: 14px;
+}
+
+.no-scores {
+  font-size: 10px;
+  color: var(--label-color);
+  transition: color 0.3s;
+}
+
+/* ---- Name input row ---- */
+.name-input-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#player-name {
+  flex: 1;
+  background: var(--kbd-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  min-width: 0;
+}
+
+#player-name:focus {
+  border-color: var(--value-color);
+}
+
+#save-score-btn {
+  background: var(--value-color);
+  color: var(--bg-page);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+#save-score-btn:hover {
+  background: #9bbdff;
+}
+
+/* ---- Reset scores button ---- */
+#reset-scores-btn {
+  margin-top: 6px;
+  background: transparent;
+  color: var(--label-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  align-self: flex-start;
+}
+
+#reset-scores-btn:hover {
+  color: var(--text-color);
+  border-color: var(--text-color);
+  background: rgba(122, 162, 247, 0.07);
+}
+
+/* ---- In-game leaderboard (overlay) ---- */
+#leaderboard {
+  width: 100%;
+  max-height: 160px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
