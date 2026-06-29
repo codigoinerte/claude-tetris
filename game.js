@@ -160,12 +160,13 @@ function updateHUD() {
 function drawBlock(context, x, y, colorIndex, size, alpha) {
   if (!colorIndex) return;
   const color = COLORS[colorIndex];
+  context.save();
   context.globalAlpha = alpha ?? 1;
   if (currentSkin === 'neon') drawBlockNeon(context, x, y, color, size);
   else if (currentSkin === 'pastel') drawBlockPastel(context, x, y, color, size);
   else if (currentSkin === 'pixelart') drawBlockPixelArt(context, x, y, color, size);
   else drawBlockRetro(context, x, y, color, size);
-  context.globalAlpha = 1;
+  context.restore();
 }
 
 function drawBlockRetro(context, x, y, color, size) {
@@ -180,6 +181,7 @@ function drawBlockNeon(context, x, y, color, size) {
   context.shadowColor = color;
   context.fillStyle = color;
   context.fillRect(x * size + 1, y * size + 1, size - 2, size - 2);
+  // highlight drawn without glow (restore() in caller resets shadowBlur)
   context.shadowBlur = 0;
   context.fillStyle = 'rgba(255,255,255,0.25)';
   context.fillRect(x * size + 2, y * size + 2, size - 4, 3);
@@ -216,7 +218,6 @@ function setSkin(name) {
 }
 
 function drawGrid() {
-  ctx.shadowBlur = 0;
   ctx.strokeStyle = document.body.classList.contains('light-mode') ? '#d0d0e0' : '#22222e';
   ctx.lineWidth = 0.5;
   for (let c = 1; c < COLS; c++) {
